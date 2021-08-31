@@ -1,0 +1,55 @@
+<dx-tree-list
+  id="employees"
+  [dataSource]="employees"
+  keyExpr="ID"
+  parentIdExpr="Head_ID"
+  [showRowLines]="true"
+  [showBorders]="true"
+  [columnAutoWidth]="true"
+  [expandedRowKeys]="[1, 2, 10]"
+  [(selectedRowKeys)]="selectedRowKeys"
+  (onSelectionChanged)="onSelectionChanged($event)"
+>
+  <dxo-selection mode="multiple" [recursive]="recursiveSelectionEnabled">
+  </dxo-selection>
+  <dxi-column dataField="Full_Name" caption="Nom"></dxi-column>
+  <dxi-column dataField="Title" caption="Date"></dxi-column>
+  <dxi-column dataField="Poste"></dxi-column>
+  <dxi-column dataField="Zone"></dxi-column>
+  <dxi-column dataField="Quantite"></dxi-column>
+  <dxi-column dataField="Details"></dxi-column>
+  <dxi-column dataField="Status"></dxi-column>
+  <dxi-column
+    dataField="Hire_Date"
+    caption="Hire Date"
+    dataType="date"
+    [width]="120"
+  ></dxi-column>
+</dx-tree-list>
+<div class="options">
+  <div class="caption">Options</div>
+  <div class="option">
+    <span>Selection Mode</span>{{ ' ' }}
+    <dx-select-box
+      [(value)]="selectionMode"
+      [items]="['all', 'excludeRecursive', 'leavesOnly']"
+      (onValueChanged)="onOptionsChanged($event)"
+      text="Recursive Selection"
+    >
+    </dx-select-box>
+  </div>
+  <div class="option">
+    <dx-check-box
+      [(value)]="recursiveSelectionEnabled"
+      (onValueChanged)="onOptionsChanged($event)"
+      text="Recursive Selection"
+    >
+    </dx-check-box>
+  </div>
+  <div class="selected-data">
+    <span class="caption">Selected Records:</span>
+    <span>
+      {{ selectedEmployeeNames }}
+    </span>
+  </div>
+</div>
